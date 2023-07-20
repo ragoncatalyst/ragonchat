@@ -1,10 +1,15 @@
 import { useState } from 'react';
 import styles from './chat.module.css';
 
+interface Conversation {
+    name: string;
+    // Other properties of the conversation object
+  }
+
 export default function Chat() {
-  const [conversations, setConversations] = useState([]);
+  const [conversations, setConversations] = useState<Conversation[]>([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
-  const [chatHistory, setChatHistory] = useState([]);
+  const [chatHistory, setChatHistory] = useState<{ sender: string; content: string; }[]>([]);
   const [messageInput, setMessageInput] = useState('');
 
   const handleConversationClick = (conversation) => {
