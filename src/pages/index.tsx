@@ -158,7 +158,7 @@ export default function Flex() {
           <textarea value={answer} onChange={onAnswerChange} placeholder="Please start to write..." className="h-full bg-slate-100 rounded-md text-slate-800 p-3 resize-none" />
           <button onClick={onSubmit} className="btn btn-sm btn-block btn-neutral w-15 h-15">Submit</button>
         </div>
-        <div className="flex-auto bg-slate-100 w-1/2 rounded-md">{result}</div>
+        <div className="flex-auto bg-slate-100 w-1/2 rounded-md text-primary overflow-y-auto">{result}</div>
       </div>
 
     </div>
