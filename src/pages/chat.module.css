@@ -3,15 +3,19 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
+    background-color: lightgray;
   }
   
   .chat-container {
     background-color: #f1f1f1;
-    max-width: 800px;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
+    height: 90%;
+    width: 100%;
+    margin: 5px;
   }
   
   .conversations-list {
@@ -47,7 +51,10 @@
   .chat-history {
     flex-grow: 1;
     overflow-y: auto;
-    padding-right: 20px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    border-color: #ccc;
+    border-width: 1px
   }
   
   .chat-message {
@@ -70,13 +77,17 @@
   
   .chat-input-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 8px;
+    height: 50%;
+    gap: 4px;
   }
   
   .chat-input {
     flex-grow: 1;
-    padding: 10px;
+    padding: 8px;
+    width: 100%;
     border-radius: 4px;
     border: 1px solid #ccc;
     color: #000000; /* Add this line */
@@ -85,7 +96,8 @@
   
   .chat-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    width: 100%;
+    background-color: #5c738c;
     color: #ffffff;
     border: none;
     border-radius: 4px;
