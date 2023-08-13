@@ -209,3 +209,25 @@ body {
   color: #007bff;
   text-decoration: none;
 }
+
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+html.dark ::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+html.dark ::-webkit-scrollbar-thumb {
+  @apply bg-gray-700 rounded-full;
+}
+html.dark ::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
