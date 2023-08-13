@@ -12,6 +12,9 @@ import { TbReportSearch } from 'react-icons/tb'
 import { BiStopwatch } from 'react-icons/bi';
 import { MdHistory } from 'react-icons/md';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
+import { BiGlobe } from 'react-icons/bi';
+
+
 import Markdown from 'react-markdown';
 import gfm from 'remark-gfm';
 
@@ -34,13 +37,13 @@ const people = [
 ]
 
 const ag = [
-  { id: "a", icon: VscGraph, name: 'Academic', unavailable: false },
-  { id: "g", icon: LiaMapMarkedAltSolid, name: 'General Training', unavailable: false },
+  { id: "a", icon: HiOutlineAcademicCap, name: 'Academic', unavailable: false },
+  { id: "g", icon: BiGlobe, name: 'General Training', unavailable: false },
 ]
 
 const tasks = [
   { id: "1", icon: VscGraph, name: 'Task 1', unavailable: false },
-  { id: "2", icon: LiaMapMarkedAltSolid, name: 'Task 2', unavailable: false },
+  { id: "2", icon: BiConversation, name: 'Task 2', unavailable: false },
 ]
 
 
@@ -153,8 +156,8 @@ export default function Page() {
     }
   };
 
-  const onGenerate = async () => {
-    console.log('onGenerate');
+  const onGenerateQuestion = async () => {
+    console.log('onGenerateQuestion');
     const testName = ag.find(item => item.id === category)?.name || 'Academic';
     const prompt = `
     Please act as a professional IELTS examiner and design an original IELTS ${testName} writing task ${task}.
@@ -165,9 +168,11 @@ export default function Page() {
     
     Do not include testing topics involve charts or pictures as you are not able to provide multimedia information. 
 
-    Do not repeat your last provided writing task as follows:
+    Do not repeat your last provided writing task as follows (wrapped with ~~~~~~~~):
     
+    ~~~~~~~~
     ${question}
+    ~~~~~~~~
     `;
     console.log('prompt', prompt);
     setGeneratingQuestion(true);
@@ -280,7 +285,7 @@ export default function Page() {
               </Popover.Panel>
             </Popover>
 
-            <button onClick={onGenerate} className="btn btn-sm items-center btn-ghost">
+            <button onClick={onGenerateQuestion} className="btn btn-sm items-center btn-ghost">
               {question ? 'Regenerate' : 'Generate'}
             </button>
 
