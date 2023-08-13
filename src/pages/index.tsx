@@ -190,6 +190,15 @@ export default function Page() {
     setGeneratingQuestion(false);
   };
 
+  const SampleButton = () => (
+    <button onClick={onExample} className="btn btn-outline btn-glass">
+      {generatingExample && (
+        <div className="loading loading-spinner loading-sm" />
+      )}
+      Generate Example
+    </button>
+  );
+
   return (
     <div className="flex flex-col md:flex-row w-full items-center h-screen min-h-screen bg-base-200 gap-3 p-2">
       {/* <div className="sidebar flex w-10 h-full">
@@ -326,16 +335,15 @@ export default function Page() {
         <div className="flex bg-gray-800 w-full h-1/2 rounded-md text-secondary justify-center overflow-y-auto p-2">
           {result || 'Results'}
         </div>
-        <div className="flex flex-col bg-gray-800 w-full h-1/2 rounded-md text-base-content justify-center items-center p-2 gap-2 overflow-y-auto">
-          <div>
-            <Markdown remarkPlugins={[gfm]} children={example} />
-          </div>
-          <button onClick={onExample} className="btn btn-outline btn-glass">
-            {generatingExample && (
-              <div className="loading loading-spinner loading-sm" />
-            )}
-            Generate Example
-          </button>
+        <div className="flex bg-gray-800 w-full h-1/2 rounded-md text-base-content p-2 gap-2 overflow-y-auto">
+          {example ? (
+            <div className="flex flex-col w-full gap-2">
+              <Markdown remarkPlugins={[gfm]} children={example} className="markdown-container" />
+              <SampleButton />
+            </div>) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <SampleButton />
+            </div>)}
         </div>
       </div>
     </div>
