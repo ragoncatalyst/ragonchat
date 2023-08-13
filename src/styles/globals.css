@@ -23,3 +23,190 @@ body {
       transparent,
       rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: lightgray;
+}
+
+.chat-container {
+  background-color: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  height: 90%;
+  width: 100%;
+  margin: 5px;
+}
+
+.conversations-list {
+  flex-basis: 25%;
+  padding-right: 20px;
+}
+
+.conversation-item {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1d4167;
+  /* Change the background color */
+  color: #ffffff;
+  /* Change the text color */
+}
+
+.conversation-item:hover {
+  background-color: #415265;
+  /* Change the hover background color */
+}
+
+
+.conversation-item.active {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.chat-area {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 4px;
+  border-color: #ccc;
+  border-width: 1px
+}
+
+.chat-message {
+  background-color: #ffffff;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.user-message {
+  background-color: #2f4f71;
+  color: #ffffff;
+}
+
+.bot-message {
+  background-color: #f1f1f1;
+  color: #000000;
+}
+
+.chat-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 8px;
+  height: 50%;
+  gap: 4px;
+}
+
+.chat-input {
+  flex-grow: 1;
+  padding: 8px;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #000000;
+  /* Add this line */
+}
+
+
+.chat-button {
+  padding: 10px 20px;
+  width: 100%;
+  background-color: #5c738c;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Style for the container of the markdown content */
+.markdown-container {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Style for headings */
+.markdown-container h1,
+.markdown-container h2,
+.markdown-container h3,
+.markdown-container h4,
+.markdown-container h5,
+.markdown-container h6 {
+  margin: 1em 0;
+}
+
+/* Style for paragraphs */
+.markdown-container p {
+  margin: 0 0 1.5em;
+}
+
+/* Style for unordered lists */
+.markdown-container ul {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}
+
+/* Style for list items */
+.markdown-container li {
+  margin: 0.5em 0;
+  list-style-type: disc;
+}
+
+/* Style for ordered lists */
+.markdown-container ol {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}
+
+/* Style for table container */
+.markdown-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Style for table headers */
+.markdown-container th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color: #f2f2f2;
+}
+
+/* Style for table cells */
+.markdown-container td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* Style for code blocks */
+.markdown-container pre {
+  padding: 1em;
+  overflow-x: auto;
+}
+
+/* Style for inline code */
+.markdown-container code {
+  padding: 0.2em 0.4em;
+  font-family: Consolas, monospace;
+}
+
+/* Style for links */
+.markdown-container a {
+  color: #007bff;
+  text-decoration: none;
+}
