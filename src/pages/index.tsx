@@ -8,12 +8,11 @@ import { LiaMapMarkedAltSolid } from 'react-icons/lia';
 import { BiConversation } from 'react-icons/bi';
 import { AiFillFolderOpen } from 'react-icons/ai';
 import { AiOutlineSetting } from 'react-icons/ai';
-import { TbReportSearch } from 'react-icons/tb'
+import { TbReportSearch } from 'react-icons/tb';
 import { BiStopwatch } from 'react-icons/bi';
 import { MdHistory } from 'react-icons/md';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
 import { BiGlobe } from 'react-icons/bi';
-
 
 import Markdown from 'react-markdown';
 import gfm from 'remark-gfm';
@@ -23,35 +22,36 @@ import { Dialog } from '@headlessui/react';
 
 import { useState } from 'react';
 
-
-
-
-
-
 const people = [
-  { id: "1", icon: VscGraph, name: 'Statistic Analysis', unavailable: false },
-  { id: "2", icon: LiaMapMarkedAltSolid, name: 'Map Introduction', unavailable: false },
-  { id: "3", icon: BiConversation, name: 'Discussion', unavailable: false },
-  { id: "4", icon: CiBrightnessUp, name: 'Benedict Kessler', unavailable: true },
-  { id: "5", icon: BiSearchAlt2, name: 'Katelyn Rohan', unavailable: false },
-]
+  { id: '1', icon: VscGraph, name: 'Statistic Analysis', unavailable: false },
+  {
+    id: '2',
+    icon: LiaMapMarkedAltSolid,
+    name: 'Map Introduction',
+    unavailable: false,
+  },
+  { id: '3', icon: BiConversation, name: 'Discussion', unavailable: false },
+  {
+    id: '4',
+    icon: CiBrightnessUp,
+    name: 'Benedict Kessler',
+    unavailable: true,
+  },
+  { id: '5', icon: BiSearchAlt2, name: 'Katelyn Rohan', unavailable: false },
+];
 
 const ag = [
-  { id: "a", icon: HiOutlineAcademicCap, name: 'Academic', unavailable: false },
-  { id: "g", icon: BiGlobe, name: 'General Training', unavailable: false },
-]
+  { id: 'a', icon: HiOutlineAcademicCap, name: 'Academic', unavailable: false },
+  { id: 'g', icon: BiGlobe, name: 'General Training', unavailable: false },
+];
 
 const tasks = [
-  { id: "1", icon: VscGraph, name: 'Task 1', unavailable: false },
-  { id: "2", icon: BiConversation, name: 'Task 2', unavailable: false },
-]
-
-
-
-
+  { id: '1', icon: VscGraph, name: 'Task 1', unavailable: false },
+  { id: '2', icon: BiConversation, name: 'Task 2', unavailable: false },
+];
 
 export default function Page() {
-  const [selectedPerson, setSelectedPerson] = useState(people[0])
+  const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [result, setResult] = useState('');
@@ -61,39 +61,36 @@ export default function Page() {
   const [task, setTask] = useState('1');
   const [generatingQuestion, setGeneratingQuestion] = useState(false);
 
-
   const onButtonSettings = () => {
-    console.log('ButtonSettings clicked.')
+    console.log('ButtonSettings clicked.');
   };
-
 
   const onButton1 = () => {
     console.log('Button1 clicked.');
   };
   const onButton2 = () => {
     console.log('Button2 clicked.');
-  }
+  };
   const onButton3 = () => {
     console.log('Button3 clicked.');
   };
 
   const onButtonTime = () => {
-    console.log('Time Set.')
-  }
+    console.log('Time Set.');
+  };
 
   const onSubmit = async () => {
     console.log('Submit clicked');
     try {
-      const response = await fetch('https://chatapi.lyu.ai/api/chat',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            text: answer
-          })
-        });
+      const response = await fetch('https://chatapi.lyu.ai/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: answer,
+        }),
+      });
       const res = await response.json();
       console.log('text', res.text);
       setResult(res.text);
@@ -104,17 +101,17 @@ export default function Page() {
 
   const onAnswerChange = (e: any) => {
     setAnswer(e.target.value);
-  }
+  };
 
   const onSelectCategory = (id: string) => {
     console.log('onSelectCategory', id);
     setCategory(id);
-  }
+  };
 
   const onSelectTask = (id: string) => {
     console.log('onSelectTask', id);
     setTask(id);
-  }
+  };
 
   const onLoadSettings = async (id: string) => {
     console.log('onLoadSettings', id);
@@ -126,26 +123,24 @@ export default function Page() {
     } catch (error) {
       console.error('Error fetching HTML:', error);
     }
-  }
-
+  };
 
   const onExample = async () => {
     console.log('Example clicked');
     try {
       setGeneratingExample(true);
-      const response = await fetch('https://chatapi.lyu.ai/api/chat',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-          },
-          body: JSON.stringify({
-            text: `Please act as an IELTS examiner, based on this question: ${question} (you can ignore the images), provide an example of answer with score 8 criteria.
+      const response = await fetch('https://chatapi.lyu.ai/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+        body: JSON.stringify({
+          text: `Please act as an IELTS examiner, based on this question: ${question} (you can ignore the images), provide an example of answer with score 8 criteria.
             If no question provided, please give your own question and then generate example answer for this question.
-            `
-          })
-        });
+            `,
+        }),
+      });
       const res = await response.json();
       console.log('text', res.text);
       setExample(res.text);
@@ -177,16 +172,15 @@ export default function Page() {
     console.log('prompt', prompt);
     setGeneratingQuestion(true);
     try {
-      const response = await fetch('https://chatapi.lyu.ai/api/chat',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            text: prompt
-          })
-        });
+      const response = await fetch('https://chatapi.lyu.ai/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          text: prompt,
+        }),
+      });
       const res = await response.json();
       console.log('question', res.text);
       setQuestion(res.text);
@@ -196,12 +190,8 @@ export default function Page() {
     setGeneratingQuestion(false);
   };
 
-
-
-
   return (
     <div className="flex flex-col md:flex-row w-full items-center h-screen min-h-screen bg-base-200 gap-3 p-2">
-
       {/* <div className="sidebar flex w-10 h-full">
         <div className="text-base-content bg-gray-800 flex flex-col h-full rounded-md p-1 gap-2">
 
@@ -245,8 +235,8 @@ export default function Page() {
       </div> */}
 
       <div className="left-pane flex flex-col w-full lg:w-1/2 h-full gap-2">
-        <div className="flex flex-col w-full h-1/2">
-          <div className="text-base-content flex-0 bg-base-100 w-full flex items-center h-14 rounded-t-md p-1 gap-1">
+        <div className="relative question flex flex-col w-full h-1/2">
+          <div className="toolbar text-base-content flex-0 bg-base-100 w-full flex items-center h-14 rounded-t-md p-1 gap-1">
             <Popover className="relative">
               <Popover.Button className="w-48 h-9 outline-none hover:bg-neutral-focus rounded-md onClick=bg-neutral">
                 {ag.find(item => item.id === category)?.name || 'Not found'}
@@ -255,16 +245,17 @@ export default function Page() {
               <Popover.Panel className="absolute z-50 w-full">
                 <div className="flex flex-col bg-base-100 gap-2 rounded-md shadow">
                   {ag.map(({ id, icon: Icon, name }) => (
-                    <div key={id} className="hover:bg-neutral-focus p-2 gap-2 flex items-center" onClick={() => onSelectCategory(id)}>
+                    <div
+                      key={id}
+                      className="hover:bg-neutral-focus p-2 gap-2 flex items-center"
+                      onClick={() => onSelectCategory(id)}
+                    >
                       <Icon className="w-5 h-5" />
                       {name}
                     </div>
                   ))}
                 </div>
-                <div className='text-base-content w-full h-full'></div>
-
-
-
+                <div className="text-base-content w-full h-full"></div>
               </Popover.Panel>
             </Popover>
 
@@ -275,55 +266,78 @@ export default function Page() {
               <Popover.Panel className="absolute z-50 w-full">
                 <div className="flex flex-col bg-base-100 gap-2 rounded-md shadow">
                   {tasks.map(({ id, icon: Icon, name }) => (
-                    <div key={id} className="hover:bg-neutral-focus p-2 gap-2 flex items-center" onClick={() => onSelectTask(id)}>
+                    <div
+                      key={id}
+                      className="hover:bg-neutral-focus p-2 gap-2 flex items-center"
+                      onClick={() => onSelectTask(id)}
+                    >
                       <Icon className="w-5 h-5" />
                       {name}
                     </div>
                   ))}
                 </div>
-                <div className='text-base-content w-full h-full'></div>
+                <div className="text-base-content w-full h-full"></div>
               </Popover.Panel>
             </Popover>
 
-            <button onClick={onGenerateQuestion} className="btn btn-sm items-center btn-ghost">
+            <button
+              onClick={onGenerateQuestion}
+              className="btn btn-sm items-center btn-ghost"
+            >
               {question ? 'Regenerate' : 'Generate'}
             </button>
 
-            <button onClick={onButtonTime} className="btn btn-sm btn-circle items-center btn-ghost">
+            <button
+              onClick={onButtonTime}
+              className="btn btn-sm btn-circle items-center btn-ghost"
+            >
               <BiStopwatch className="w-6 h-6" />
             </button>
           </div>
 
-
-          <div className="bg-gray-800 w-full flex-1 rounded-b-md text-gray-300">
-            <div className="relative w-full h-full">
-              <div className="w-full h-full overflow-y-auto">
-                <Markdown remarkPlugins={[gfm]} className="markdown-container p-4">{question}</Markdown>
-              </div>
-              {generatingQuestion &&
-                <div className="absolute inset-0 flex items-center justify-center bg-accent/20">
-                  <div className="text-primary loading loading-spinner" />
-                </div>}
-            </div>
+          <div className="bg-gray-800 w-full flex-1 rounded-b-md text-gray-300 overflow-y-auto p-2">
+            <Markdown remarkPlugins={[gfm]} className="markdown-container">
+              {question}
+            </Markdown>
           </div>
-
+          {generatingQuestion && (
+            <div className="absolute inset-0 flex items-center justify-center bg-accent/20 rounded-md">
+              <div className="text-primary loading loading-spinner" />
+            </div>
+          )}
         </div>
 
         <div className="flex flex-col w-full h-1/2 bg-gray-800 gap-2 rounded-md">
-          <textarea value={answer} onChange={onAnswerChange} placeholder="Please start to write..." className="h-full bg-gray-800 rounded-md text-gray-300 p-3 resize-none" />
-          <button onClick={onSubmit} className="btn btn-sm btn-block btn-base-100 w-15 h-15">Submit</button>
+          <textarea
+            value={answer}
+            onChange={onAnswerChange}
+            placeholder="Please start to write..."
+            className="h-full bg-gray-800 rounded-md text-gray-300 p-3 resize-none"
+          />
+          <button
+            onClick={onSubmit}
+            className="btn btn-sm btn-block btn-base-100 w-15 h-15"
+          >
+            Submit
+          </button>
         </div>
-
       </div>
       <div className="right-pane flex  flex-col w-full lg:w-1/2 h-full gap-2">
-        <div className="flex bg-gray-800 w-full h-1/2 rounded-md text-secondary justify-center overflow-y-auto p-2">{result || 'Results'}</div>
+        <div className="flex bg-gray-800 w-full h-1/2 rounded-md text-secondary justify-center overflow-y-auto p-2">
+          {result || 'Results'}
+        </div>
         <div className="flex flex-col bg-gray-800 w-full h-1/2 rounded-md text-base-content justify-center items-center p-2 gap-2 overflow-y-auto">
-          <div><Markdown remarkPlugins={[gfm]} children={example} /></div>
+          <div>
+            <Markdown remarkPlugins={[gfm]} children={example} />
+          </div>
           <button onClick={onExample} className="btn btn-outline btn-glass">
-            {generatingExample && <div className="loading loading-spinner loading-sm" />}
-            Generate Example</button>
+            {generatingExample && (
+              <div className="loading loading-spinner loading-sm" />
+            )}
+            Generate Example
+          </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
