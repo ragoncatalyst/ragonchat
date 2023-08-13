@@ -246,16 +246,16 @@ export default function Page() {
 
       <div className="left-pane flex flex-col w-full lg:w-1/2 h-full gap-2">
         <div className="flex flex-col w-full h-1/2">
-          <div className="text-base-content flex-0 bg-base-100 w-full flex items-center h-14 rounded-t-md p-1 gap-1">
+          <div className="text-base-content flex-0 bg-slate-900 w-full flex items-center h-14 rounded-t-md p-1 gap-1">
             <Popover className="relative">
-              <Popover.Button className="w-48 h-9 outline-none hover:bg-neutral-focus rounded-md onClick=bg-neutral">
+              <Popover.Button className="w-48 h-9 bg-slate-800 outline-none hover:bg-slate-950 rounded-md onClick=bg-neutral">
                 {ag.find(item => item.id === category)?.name || 'Not found'}
               </Popover.Button>
 
               <Popover.Panel className="absolute z-50 w-full">
-                <div className="flex flex-col bg-base-100 gap-2 rounded-md shadow">
+                <div className="flex flex-col bg-slate-800 gap-2 rounded-md shadow">
                   {ag.map(({ id, icon: Icon, name }) => (
-                    <div key={id} className="hover:bg-neutral-focus p-2 gap-2 flex items-center" onClick={() => onSelectCategory(id)}>
+                    <div key={id} className="hover:bg-blue-600 p-2 gap-2 flex items-center" onClick={() => onSelectCategory(id)}>
                       <Icon className="w-5 h-5" />
                       {name}
                     </div>
@@ -285,11 +285,11 @@ export default function Page() {
               </Popover.Panel>
             </Popover>
 
-            <button onClick={onGenerateQuestion} className="btn btn-sm items-center btn-ghost">
+            <button onClick={onGenerateQuestion} className="btn btn-sm items-center btn-md">
               {question ? 'Regenerate' : 'Generate'}
             </button>
 
-            <button onClick={onButtonTime} className="btn btn-sm btn-circle items-center btn-ghost">
+            <button onClick={onButtonTime} className="btn btn-sm btn-circle items-center btn-md">
               <BiStopwatch className="w-6 h-6" />
             </button>
           </div>
