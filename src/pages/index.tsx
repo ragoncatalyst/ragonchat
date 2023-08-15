@@ -385,7 +385,7 @@ export default function Page() {
           <textarea
             value={answer}
             onChange={onAnswerChange}
-            placeholder="Step4: Please start to write..."
+            placeholder="Step4: Write at least 100 words to submit."
             className="h-full bg-gray-800 rounded-md text-gray-300 p-3 resize-none"
           />
           <div className="flex items-center gap-2 text-gray-300 w-full">
@@ -396,7 +396,7 @@ export default function Page() {
                 answer ? '' : 'btn-disabled'
               } `}
             >
-              {answer.length > 100 ? 'Submit' : 'Please write'}
+              {answerWordCount > 100 ? 'Submit' : 'Please write'}
             </button>
           </div>
         </div>
