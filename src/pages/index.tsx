@@ -53,11 +53,6 @@ const tasks = [
   { id: '2', icon: BiConversation, name: 'Task 2', unavailable: false },
 ];
 
-const findFunc = function(item: any) {
-   if (item.id === '1') 
-    return item; 
-}
-
 export default function Page() {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [question, setQuestion] = useState('');
@@ -85,7 +80,9 @@ export default function Page() {
         const elapsedSeconds = Math.floor(elapsedMilliseconds / 1000);
         const minutes = Math.floor(elapsedSeconds / 60);
         const seconds = elapsedSeconds % 60;
-        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(
+          seconds
+        ).padStart(2, '0')}`;
         setEllapsedTime(formattedTime);
       }, 1000);
     }
@@ -99,9 +96,9 @@ export default function Page() {
 
   useEffect(() => {
     // Calculate the word count
-    const count = answer.split(" ").filter((word) => word !== "").length;
+    const count = answer.split(' ').filter(word => word !== '').length;
     setAnswerWordCount(count);
-  }, [answer]);  
+  }, [answer]);
 
   const onSubmit = async () => {
     console.log('Submit clicked');
@@ -138,7 +135,6 @@ export default function Page() {
       setScoring(false);
     }
   };
-
 
   const onAnswerChange = (e: any) => {
     setAnswer(e.target.value);
@@ -289,7 +285,9 @@ export default function Page() {
             <div className="flex items-center p-1 gap-2">
               <div className="flex items-center gap-2">
                 <img src="/logo.png" alt="logo" className="w-8 h-8" />
-                <div className="hidden lg:block font-bold text-blue-900">IELTS Catalyst</div>
+                <div className="hidden lg:block font-bold text-blue-900">
+                  IELTS Catalyst
+                </div>
               </div>
               <Popover className="relative">
                 <Popover.Button className="h-9 px-4 bg-slate-800 outline-none hover:bg-blue-700 rounded-md">
@@ -316,7 +314,9 @@ export default function Page() {
 
               <Popover className="relative">
                 <Popover.Button className="h-9 px-4 bg-slate-800 outline-none hover:bg-blue-700 rounded-md">
-                  {isLargeScreen ? tasks.find(item => item.id === task)?.name : task}
+                  {isLargeScreen
+                    ? tasks.find(item => item.id === task)?.name
+                    : task}
                 </Popover.Button>
                 <Popover.Panel className="absolute z-50">
                   <div className="flex flex-col bg-slate-900 gap-2 rounded-md shadow">
@@ -337,7 +337,6 @@ export default function Page() {
               </Popover>
             </div>
 
-
             <div className="flex items-center gap-2">
               <button
                 onClick={onGenerateQuestion}
@@ -350,21 +349,34 @@ export default function Page() {
             </div>
           </div>
 
-          <div className={`bg-gray-800 w-full flex-1 rounded-b-md text-gray-300 overflow-y-auto p-2`}>
-            {question ?
+          <div
+            className={`bg-gray-800 w-full flex-1 rounded-b-md text-gray-300 overflow-y-auto p-2`}
+          >
+            {question ? (
               <Markdown remarkPlugins={[gfm]} className="markdown-container">
                 {question}
-              </Markdown> : <div className="text-gray-400">
-                <p>Step1: Click <b>Acadmic</b> to choose: Acadmic / General Training</p>
-                <p>Step2: Click <b>Task 1</b> to choose: Task 1 / Task 2</p>
-                <p>Step3: Click <b>Generate</b> to generate a question</p>
+              </Markdown>
+            ) : (
+              <div className="text-gray-400">
+                <p>
+                  Step1: Click <b>Acadmic</b> to choose: Acadmic / General
+                  Training
+                </p>
+                <p>
+                  Step2: Click <b>Task 1</b> to choose: Task 1 / Task 2
+                </p>
+                <p>
+                  Step3: Click <b>Generate</b> to generate a question
+                </p>
               </div>
-            }
+            )}
           </div>
           {generatingQuestion && (
             <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center bg-slate-800 rounded-md">
               <div className="loading loading-spinner text-blue-800" />
-              <div className="text-gray-300">Generating... Finishing in about 15 seconds.</div>
+              <div className="text-gray-300">
+                Generating... Finishing in about 15 seconds.
+              </div>
             </div>
           )}
         </div>
@@ -380,7 +392,10 @@ export default function Page() {
             <div className="ml-2 whitespace-nowrap">{`${answerWordCount} words`}</div>
             <button
               onClick={onSubmit}
-              className={`bg-blue-900 w-full h-12 normal-case hover:bg-blue-700 ${answer ? '' : 'btn-disabled'} `}>
+              className={`bg-blue-900 w-full h-12 normal-case hover:bg-blue-700 ${
+                answer ? '' : 'btn-disabled'
+              } `}
+            >
               {answer.length > 100 ? 'Submit' : 'Please write'}
             </button>
           </div>
@@ -390,24 +405,42 @@ export default function Page() {
         <div className="relative flex flex-col bg-gray-800 w-full h-1/3 rounded-md text-secondary justify-center overflow-y-auto p-3 gap-2">
           {scoring && (
             <div className="absolute inset-0 flex items-center justify-center bg-slate-800 rounded-md gap-2">
-
               <div className="text-blue-800 loading loading-spinner" />
-              <div className="text-gray-300">Scoring... Finishing in about 5 seconds.</div>
+              <div className="text-gray-300">
+                Scoring... Finishing in about 5 seconds.
+              </div>
             </div>
           )}
-          {comments ? '' :
+          {comments ? (
+            ''
+          ) : (
             <div className="text-gray-400">
               <p>Step5: Your score and results will be shown here.</p>
-              <p>Step6: Click <b>Generate Example</b> to get an example if you want.</p>
+              <p>
+                Step6: Click <b>Generate Example</b> to get an example if you
+                want.
+              </p>
             </div>
-          }
-          <div className="text-5xl w-full text-center font-bold text-gray-300">{score}</div>
+          )}
+          <div className="text-5xl w-full text-center font-bold text-gray-300">
+            {score}
+          </div>
           <div className="w-full text-gray-300">{comments}</div>
         </div>
         <div className="flex bg-slate-800 w-full h-2/3 rounded-md text-gray-300 p-3 gap-2 overflow-y-auto">
-          <div className={`flex flex-col w-full gap-2 ${example ? '' : 'h-full items-center justify-center'}`}>
-            <Markdown remarkPlugins={[gfm]} className="markdown-container" >{example}</Markdown>
-            <button id="sample" onClick={onExample} className="btn text-gray-300 bg-blue-900 normal-case hover:bg-blue-700">
+          <div
+            className={`flex flex-col w-full gap-2 ${
+              example ? '' : 'h-full items-center justify-center'
+            }`}
+          >
+            <Markdown remarkPlugins={[gfm]} className="markdown-container">
+              {example}
+            </Markdown>
+            <button
+              id="sample"
+              onClick={onExample}
+              className="btn text-gray-300 bg-blue-900 normal-case hover:bg-blue-700"
+            >
               {generatingExample && (
                 <div className="loading loading-spinner loading-sm" />
               )}
