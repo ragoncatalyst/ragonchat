@@ -53,10 +53,16 @@ const tasks = [
   { id: '2', icon: BiConversation, name: 'Task 2', unavailable: false },
 ];
 
+const findFunc = function(item: any) {
+   if (item.id === '1') 
+    return item; 
+}
+
 export default function Page() {
   const [selectedPerson, setSelectedPerson] = useState(people[0]);
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
+  const [answerWordCount, setAnswerWordCount] = useState(0);
   const [result, setResult] = useState('');
   const [example, setExample] = useState('');
   const [generatingExample, setGeneratingExample] = useState(false);
@@ -91,23 +97,11 @@ export default function Page() {
     };
   }, [startTime]);
 
-  const onButtonSettings = () => {
-    console.log('ButtonSettings clicked.');
-  };
-
-  const onButton1 = () => {
-    console.log('Button1 clicked.');
-  };
-  const onButton2 = () => {
-    console.log('Button2 clicked.');
-  };
-  const onButton3 = () => {
-    console.log('Button3 clicked.');
-  };
-
-  const onButtonTime = () => {
-    console.log('Time Set.');
-  };
+  useEffect(() => {
+    // Calculate the word count
+    const count = answer.split(" ").filter((word) => word !== "").length;
+    setAnswerWordCount(count);
+  }, [answer]);  
 
   const onSubmit = async () => {
     console.log('Submit clicked');
@@ -144,23 +138,6 @@ export default function Page() {
       setScoring(false);
     }
   };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   const onAnswerChange = (e: any) => {
@@ -392,18 +369,21 @@ export default function Page() {
           )}
         </div>
 
-        <div className="flex flex-col w-full h-1/2 bg-gray-800 gap-2 rounded-md">
+        <div className="flex flex-col w-full h-1/2 bg-gray-800 gap-2 rounded-md overflow-hidden">
           <textarea
             value={answer}
             onChange={onAnswerChange}
             placeholder="Step4: Please start to write..."
             className="h-full bg-gray-800 rounded-md text-gray-300 p-3 resize-none"
           />
-          <button
-            onClick={onSubmit}
-            className={`btn-sm bg-blue-900 text-gray-300 rounded-b normal-case hover:bg-blue-700 ${answer ? '' : 'btn-disabled'} `}>
-            {answer.length > 100 ? 'Submit' : 'Please write'}
-          </button>
+          <div className="flex items-center gap-2 text-gray-300 w-full">
+            <div className="ml-2 whitespace-nowrap">{`${answerWordCount} words`}</div>
+            <button
+              onClick={onSubmit}
+              className={`bg-blue-900 w-full h-12 normal-case hover:bg-blue-700 ${answer ? '' : 'btn-disabled'} `}>
+              {answer.length > 100 ? 'Submit' : 'Please write'}
+            </button>
+          </div>
         </div>
       </div>
       <div className="right-pane flex  flex-col w-full lg:w-1/2 h-full gap-2">
