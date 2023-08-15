@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>ILETS Catalyst</title>
+        <title>IELTS Catalyst</title>
       </Head>
       <body>
         <Main />

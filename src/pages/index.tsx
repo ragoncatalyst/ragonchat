@@ -303,7 +303,7 @@ export default function Page() {
             <div className="flex items-center p-1 gap-2">
               <div className="flex items-center gap-2">
                 <img src="/logo.png" alt="logo" className="w-8 h-8" />
-                <div className="font-bold text-blue-900">ILETS Catalyst</div>
+                <div className="font-bold text-blue-900">IELTS Catalyst</div>
               </div>
               <Popover className="relative">
                 <Popover.Button className="h-9 px-2 bg-slate-800 outline-none hover:bg-blue-700 rounded-md onClick=bg-neutral">
