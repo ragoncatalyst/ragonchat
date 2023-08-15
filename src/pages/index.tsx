@@ -1,3 +1,5 @@
+'use client';
+
 import { BiAccessibility } from 'react-icons/bi';
 import { CiBrightnessUp } from 'react-icons/ci';
 import { BiSearchAlt2 } from 'react-icons/bi';
@@ -13,6 +15,7 @@ import { BiStopwatch } from 'react-icons/bi';
 import { MdHistory } from 'react-icons/md';
 import { HiOutlineAcademicCap } from 'react-icons/hi';
 import { BiGlobe } from 'react-icons/bi';
+import { useWindowSize } from 'react-use';
 
 import Markdown from 'react-markdown';
 import gfm from 'remark-gfm';
@@ -66,6 +69,7 @@ export default function Page() {
   const [startTime, setStartTime] = useState<number | null>(null);
   const [ellapsedTime, setEllapsedTime] = useState('00:00');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const isLargeScreen = useWindowSize().width > 1240;
 
   useEffect(() => {
     if (startTime) {
@@ -253,6 +257,11 @@ export default function Page() {
     setGeneratingQuestion(false);
   };
 
+  const getDisplayName = (_name: string | undefined) => {
+    const name = _name || 'Not found';
+    return isLargeScreen ? name : name[0];
+  };
+
   return (
     <div className="flex flex-col md:flex-row w-full items-center h-screen min-h-screen bg-base-200 gap-3 p-2">
       {/* <div className="sidebar flex w-10 h-full">
@@ -303,11 +312,11 @@ export default function Page() {
             <div className="flex items-center p-1 gap-2">
               <div className="flex items-center gap-2">
                 <img src="/logo.png" alt="logo" className="w-8 h-8" />
-                <div className="font-bold text-blue-900">IELTS Catalyst</div>
+                <div className="hidden lg:block font-bold text-blue-900">IELTS Catalyst</div>
               </div>
               <Popover className="relative">
-                <Popover.Button className="h-9 px-2 bg-slate-800 outline-none hover:bg-blue-700 rounded-md onClick=bg-neutral">
-                  {ag.find(item => item.id === category)?.name || 'Not found'}
+                <Popover.Button className="h-9 px-4 bg-slate-800 outline-none hover:bg-blue-700 rounded-md">
+                  {getDisplayName(ag.find(item => item.id === category)?.name)}
                 </Popover.Button>
 
                 <Popover.Panel className="absolute z-50">
@@ -329,8 +338,8 @@ export default function Page() {
               </Popover>
 
               <Popover className="relative">
-                <Popover.Button className="h-9 px-2 bg-slate-800 outline-none hover:bg-blue-700 rounded-md">
-                  {tasks.find(item => item.id === task)?.name || 'Not found'}
+                <Popover.Button className="h-9 px-4 bg-slate-800 outline-none hover:bg-blue-700 rounded-md">
+                  {isLargeScreen ? tasks.find(item => item.id === task)?.name : task}
                 </Popover.Button>
                 <Popover.Panel className="absolute z-50">
                   <div className="flex flex-col bg-slate-900 gap-2 rounded-md shadow">
@@ -359,7 +368,7 @@ export default function Page() {
               >
                 {question ? 'Regenerate' : 'Generate'}
               </button>
-              <BiStopwatch className="w-6 h-6" />
+              <BiStopwatch className="hidden lg:block w-6 h-6" />
               <div className="w-12 text-right">{ellapsedTime}</div>
             </div>
           </div>
