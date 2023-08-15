@@ -369,9 +369,9 @@ export default function Page() {
               <Markdown remarkPlugins={[gfm]} className="markdown-container">
                 {question}
               </Markdown> : <div className="text-gray-400">
-                <p>Step1: Click "Acadmic" to choose: Acadmic / General Training</p>
-                <p>Step2: Click "Task 1" to choose: Task 1 / Task 2</p>
-                <p>Step3: Click "Generate" to generate a question</p>
+                <p>Step1: Click <b>Acadmic</b> to choose: Acadmic / General Training</p>
+                <p>Step2: Click <b>Task 1</b> to choose: Task 1 / Task 2</p>
+                <p>Step3: Click <b>Generate</b> to generate a question</p>
               </div>
             }
           </div>
@@ -409,7 +409,7 @@ export default function Page() {
           {comments ? '' :
             <div className="text-gray-400">
               <p>Step5: Your score and results will be shown here.</p>
-              <p>Step6: Click "Generate Example" to get an example if you want.</p>
+              <p>Step6: Click <b>Generate Example</b> to get an example if you want.</p>
             </div>
           }
           <div className="text-5xl w-full text-center font-bold text-gray-300">{score}</div>
@@ -417,7 +417,7 @@ export default function Page() {
         </div>
         <div className="flex bg-slate-800 w-full h-2/3 rounded-md text-gray-300 p-3 gap-2 overflow-y-auto">
           <div className={`flex flex-col w-full gap-2 ${example ? '' : 'h-full items-center justify-center'}`}>
-            <Markdown remarkPlugins={[gfm]} children={example} className="markdown-container" />
+            <Markdown remarkPlugins={[gfm]} className="markdown-container" >{example}</Markdown>
             <button id="sample" onClick={onExample} className="btn text-gray-300 bg-blue-900 normal-case hover:bg-blue-700">
               {generatingExample && (
                 <div className="loading loading-spinner loading-sm" />
